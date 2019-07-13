@@ -4,10 +4,10 @@ import csv
 import datetime
 import time
 
-file = "speedtesting.csv"
+file = "speedtesting_datetest.csv"
 
 if not os.path.isfile(file):
-    headers = [['date', 'time(JST)','download', 'upload']]
+    headers = [['date_time_(JST)','download', 'upload']]
     with open(file, 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(headers)
@@ -34,7 +34,7 @@ while running:
 
     download = int(results_dict['download'])
     upload = int(results_dict['upload'])
-    new_row = [date_string, time_string, download, upload]
+    new_row = [current_date_string, download, upload]
 
     with open(file, 'a') as csvFile:
         writer = csv.writer(csvFile)
