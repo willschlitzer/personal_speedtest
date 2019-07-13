@@ -20,12 +20,8 @@ while running:
     date_string = date_object.strftime("%d/%m/%y")
     time_string = date_object.strftime("%H:%M")
     servers = []
-    # If you want to test against a specific server
-    # servers = [1234]
 
     threads = 1
-    # If you want to use a single threaded test
-    # threads = 1
 
     s = speedtest.Speedtest()
     s.get_servers(servers)
