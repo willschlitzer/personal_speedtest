@@ -4,24 +4,19 @@ import csv
 import datetime
 import time
 
-file = "speedtesting_datetest.csv"
 
-if not os.path.isfile(file):
-    headers = [['date_time_(JST)','download', 'upload']]
-    with open(file, 'w') as writeFile:
-        writer = csv.writer(writeFile)
-        writer.writerows(headers)
+def speedtest_func(threads, file):
+    if not os.path.isfile(file):
+        headers = [['date_time_(JST)', 'download', 'upload']]
+        with open(file, 'w') as writeFile:
+            writer = csv.writer(writeFile)
+            writer.writerows(headers)
 
-running = True
-
-while running:
     date_object = datetime.datetime.now()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M")
     date_string = date_object.strftime("%d/%m/%y")
     time_string = date_object.strftime("%H:%M")
     servers = []
-
-    threads = 1
 
     s = speedtest.Speedtest()
     s.get_servers(servers)
@@ -39,5 +34,14 @@ while running:
     with open(file, 'a') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(new_row)
+
+
+running = True
+
+while running:
+    speedtest_func(threads=1, file = "speedtesting_single_thread.csv")
+    speedtest_func(threads=None, file="speedtesting_multi_thread.csv")
+    date_object = datetime.datetime.now()
+    current_date_string = date_object.strftime("%d/%m/%y %H:%M")
     print(current_date_string)
     time.sleep(300)
