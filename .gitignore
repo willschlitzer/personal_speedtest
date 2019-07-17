@@ -105,5 +105,4 @@ venv.bak/
 
 .idea/
 old_data/
-speedtesting_all_threads.csv
-*.csv
+

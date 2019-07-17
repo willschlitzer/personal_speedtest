@@ -41,8 +41,14 @@ def speedtest_func(threads, file):
 running = True
 
 while running:
-    speedtest_func(threads=1, file = file)
-    speedtest_func(threads=None, file=file)
+    try:
+        speedtest_func(threads=1, file = file)
+    except:
+        time.sleep(60)
+    try:
+        speedtest_func(threads=None, file=file)
+    except:
+        time.sleep(60)
     date_object = datetime.datetime.now()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M")
     print(current_date_string)
