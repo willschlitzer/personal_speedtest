@@ -6,10 +6,11 @@ import time
 
 file = "speedtesting_all_threads.csv"
 
+
 def speedtest_func(threads, file):
     if not os.path.isfile(file):
-        headers = [['date_time_(JST)', 'download', 'upload', 'threads']]
-        with open(file, 'w') as writeFile:
+        headers = [["date_time_(JST)", "download", "upload", "threads"]]
+        with open(file, "w") as writeFile:
             writer = csv.writer(writeFile)
             writer.writerows(headers)
 
@@ -26,14 +27,14 @@ def speedtest_func(threads, file):
 
     results_dict = s.results.dict()
 
-    download = int(results_dict['download'])
-    upload = int(results_dict['upload'])
+    download = int(results_dict["download"])
+    upload = int(results_dict["upload"])
     if threads == None:
-        new_row = [current_date_string, download, upload, 'None']
+        new_row = [current_date_string, download, upload, "None"]
     else:
         new_row = [current_date_string, download, upload, str(threads)]
 
-    with open(file, 'a') as csvFile:
+    with open(file, "a") as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(new_row)
 
@@ -42,7 +43,7 @@ running = True
 
 while running:
     try:
-        speedtest_func(threads=1, file = file)
+        speedtest_func(threads=1, file=file)
     except:
         time.sleep(60)
     try:
