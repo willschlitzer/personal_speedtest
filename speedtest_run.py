@@ -4,6 +4,9 @@ import csv
 import datetime
 import time
 
+analysis_folder_name = "data_for_analysis"
+if not os.path.isdir(analysis_folder_name):
+    os.mkdir(analysis_folder_name)
 folder_prefix = "current_data"
 file = folder_prefix + "/speedtesting_all_threads.csv"
 if not os.path.isdir(folder_prefix):
