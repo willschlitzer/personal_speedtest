@@ -4,15 +4,19 @@ import csv
 import datetime
 import time
 
-file = "speedtesting_all_threads.csv"
+folder_prefix = "current_data"
+file = folder_prefix + "/speedtesting_all_threads.csv"
+if not os.path.isdir(folder_prefix):
+    os.mkdir(folder_prefix)
+
+if not os.path.isfile(file):
+    headers = [['date_time_(JST)', 'weekday', 'download', 'upload', 'threads']]
+    with open(file, 'w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(headers)
+
 
 def speedtest_func(threads, file):
-    if not os.path.isfile(file):
-        headers = [['date_time_(JST)', 'weekday', 'download', 'upload', 'threads']]
-        with open(file, 'w') as writeFile:
-            writer = csv.writer(writeFile)
-            writer.writerows(headers)
-
     date_object = datetime.datetime.now()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M:%S")
     weekday = date_object.strftime("%A")
