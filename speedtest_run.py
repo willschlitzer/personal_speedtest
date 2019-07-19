@@ -27,14 +27,14 @@ def speedtest_func(threads, file):
 
     results_dict = s.results.dict()
 
-    download = int(results_dict['download'])
-    upload = int(results_dict['upload'])
+    download = int(results_dict["download"])
+    upload = int(results_dict["upload"])
     if threads == None:
         new_row = [current_date_string, weekday, download, upload, 'None']
     else:
         new_row = [current_date_string, weekday, download, upload, str(threads)]
 
-    with open(file, 'a') as csvFile:
+    with open(file, "a") as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(new_row)
 
@@ -42,8 +42,14 @@ def speedtest_func(threads, file):
 running = True
 
 while running:
-    speedtest_func(threads=1, file = file)
-    speedtest_func(threads=None, file=file)
+    try:
+        speedtest_func(threads=1, file=file)
+    except:
+        time.sleep(60)
+    try:
+        speedtest_func(threads=None, file=file)
+    except:
+        time.sleep(60)
     date_object = datetime.datetime.now()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M")
     print(current_date_string)
