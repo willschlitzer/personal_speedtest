@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file = "speedtesting_all_threads.csv"
+file = "data_for_analysis/speedtesting_all_threads_19Jul19.csv"
 
 df = pd.read_csv(file, index_col="date_time_(JST)", parse_dates=True)
 df_single = df[df['threads']=='1']
