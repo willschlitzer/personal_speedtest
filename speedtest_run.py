@@ -8,12 +8,12 @@ analysis_folder_name = "data_for_analysis"
 if not os.path.isdir(analysis_folder_name):
     os.mkdir(analysis_folder_name)
 folder_prefix = "current_data"
-file = folder_prefix + "/speedtesting_all_threads.csv"
+file = folder_prefix + "/speedtesting_data.csv"
 if not os.path.isdir(folder_prefix):
     os.mkdir(folder_prefix)
 
 if not os.path.isfile(file):
-    headers = [['date_time_(JST)', 'weekday', 'download', 'upload', 'threads']]
+    headers = [['date_time_(JST)', 'weekday', 'day_num', 'download', 'upload', 'threads']]
     with open(file, 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(headers)
@@ -36,10 +36,11 @@ def speedtest_func(threads, file):
 
     download = int(results_dict["download"])
     upload = int(results_dict["upload"])
+    day_num = datetime.datetime.today().weekday()
     if threads == None:
-        new_row = [current_date_string, weekday, download, upload, 'None']
+        new_row = [current_date_string, weekday, day_num, download, upload, 'None']
     else:
-        new_row = [current_date_string, weekday, download, upload, str(threads)]
+        new_row = [current_date_string, weekday, day_num, download, upload, str(threads)]
 
     with open(file, "a") as csvFile:
         writer = csv.writer(csvFile)
