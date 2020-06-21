@@ -70,4 +70,4 @@ while running:
     date_object = datetime.datetime.now()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M")
     print(current_date_string)
-    time.sleep(120)
+    time.sleep(5)
