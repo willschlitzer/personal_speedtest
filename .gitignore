@@ -106,3 +106,4 @@ venv.bak/
 .idea/
 
 data_for_analysis/
+/test_scripts/

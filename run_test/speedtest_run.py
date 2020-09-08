@@ -4,17 +4,15 @@ import csv
 import datetime
 import time
 
-analysis_folder_name = "data_for_analysis"
-if not os.path.isdir(analysis_folder_name):
-    os.mkdir(analysis_folder_name)
-folder_prefix = "current_data"
+from folder_names import folders
+
+folder_prefix = folders()
 file = folder_prefix + "/speedtesting_data.csv"
-if not os.path.isdir(folder_prefix):
-    os.mkdir(folder_prefix)
+
 
 if not os.path.isfile(file):
     headers = [
-        ["date_time_(JST)", "weekday", "day_num", "download", "upload", "threads"]
+        ["date_time_(UTC)", "weekday", "day_num", "download", "upload", "threads"]
     ]
     with open(file, "w") as writeFile:
         writer = csv.writer(writeFile)
@@ -22,7 +20,7 @@ if not os.path.isfile(file):
 
 
 def speedtest_func(threads, file):
-    date_object = datetime.datetime.now()
+    date_object = datetime.datetime.utcnow()
     current_date_string = date_object.strftime("%d/%m/%y %H:%M:%S")
     weekday = date_object.strftime("%A")
     servers = []
